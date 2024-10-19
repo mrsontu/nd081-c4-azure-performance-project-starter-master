@@ -18,7 +18,7 @@ app = Flask(__name__)
 
 # App Insights
 # TODO: Replace <INSTRUMENTATION_KEY> with your Application Insights instrumentation key
-INSTRUMENTATION_KEY = "InstrumentationKey=8eb3094b-d805-4dda-8113-bf3efac2a812;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/;LiveEndpoint=https://westus.livediagnostics.monitor.azure.com/;ApplicationId=cb09f4d1-5ce4-4ba9-a204-195a3e903cef"
+INSTRUMENTATION_KEY = "InstrumentationKey=3460234a-f495-4a32-a175-bcc0a300d135;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/;LiveEndpoint=https://westus.livediagnostics.monitor.azure.com/;ApplicationId=010cb99a-f70a-457e-b68d-5b9570b74d90"
 
 # Logging
 logger = logging.getLogger(__name__)
@@ -105,6 +105,6 @@ def index():
             return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+   app.run(host='0.0.0.0', threaded=True, debug=True)
     # TODO: Use the statement below before deployment to VMSS
     # app.run(host='0.0.0.0', threaded=True, debug=True) # remote
