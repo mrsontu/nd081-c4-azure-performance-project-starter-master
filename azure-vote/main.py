@@ -6,7 +6,13 @@ import socket
 import sys
 import logging
 from datetime import datetime
-
+from opencensus.ext.azure.log_exporter import AzureLogHandler
+from opencensus.ext.azure.log_exporter import AzureLogHandler
+from opencensus.ext.azure.metrics_exporter import MetricsExporter
+from opencensus.ext.azure.trace_exporter import AzureExporter
+from opencensus.ext.flask.flask_middleware import FlaskMiddleware
+from opencensus.trace.samplers import ProbabilitySampler
+from opencensus.trace.tracer import Tracer
 
 # App Insights
 # TODO: Replace <INSTRUMENTATION_KEY> with your Application Insights instrumentation key
