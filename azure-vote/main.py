@@ -7,23 +7,22 @@ import sys
 import logging
 from datetime import datetime
 
+
 # App Insights
-# TODO: Import required libraries for App Insights
+# TODO: Replace <INSTRUMENTATION_KEY> with your Application Insights instrumentation key
+INSTRUMENTATION_KEY = "<INSTRUMENTATION_KEY>"
 
 # Logging
-logger = # TODO: Setup logger
+logger = logging.getLogger(__name__)
+logger.addHandler(AzureLogHandler(connection_string=f'InstrumentationKey={INSTRUMENTATION_KEY}'))
+logger.setLevel(logging.INFO)
 
 # Metrics
-exporter = # TODO: Setup exporter
+exporter = MetricsExporter(connection_string=f'InstrumentationKey={INSTRUMENTATION_KEY}')
 
 # Tracing
-tracer = # TODO: Setup tracer
-
-app = Flask(__name__)
-
-# Requests
-middleware = # TODO: Setup flask middleware
-
+tracer = AzureExporter(connection_string=f'InstrumentationKey={INSTRUMENTATION_KEY}')
+sampler = ProbabilitySampler(1.0)
 # Load configurations from environment or config file
 app.config.from_pyfile('config_file.cfg')
 
