@@ -10,7 +10,7 @@ from datetime import datetime
 
 # App Insights
 # TODO: Replace <INSTRUMENTATION_KEY> with your Application Insights instrumentation key
-INSTRUMENTATION_KEY = "<INSTRUMENTATION_KEY>"
+INSTRUMENTATION_KEY = "8eb3094b-d805-4dda-8113-bf3efac2a812;IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/;LiveEndpoint=https://westus.livediagnostics.monitor.azure.com/;ApplicationId=cb09f4d1-5ce4-4ba9-a204-195a3e903cef"
 
 # Logging
 logger = logging.getLogger(__name__)
