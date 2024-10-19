@@ -13,6 +13,8 @@ from opencensus.ext.azure.trace_exporter import AzureExporter
 from opencensus.ext.flask.flask_middleware import FlaskMiddleware
 from opencensus.trace.samplers import ProbabilitySampler
 from opencensus.trace.tracer import Tracer
+app = Flask(__name__)
+
 
 # App Insights
 # TODO: Replace <INSTRUMENTATION_KEY> with your Application Insights instrumentation key
