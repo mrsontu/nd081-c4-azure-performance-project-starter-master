@@ -18,6 +18,7 @@ from opencensus.metrics.export.value import ValueDouble
 # App Insights - Replace 'your-instrumentation-key' with the actual Instrumentation Key
 instrumentation_key = '3460234a-f495-4a32-a175-bcc0a300d135'
 
+
 # Logging setup
 logger = logging.getLogger(__name__)
 logger.addHandler(AzureLogHandler(connection_string=f'InstrumentationKey={instrumentation_key}'))
@@ -25,12 +26,12 @@ logger.addHandler(AzureLogHandler(connection_string=f'InstrumentationKey={instru
 # Metrics Exporter
 exporter = MetricsExporter(connection_string=f'InstrumentationKey={instrumentation_key}')
 
-# Define Metric Descriptors for Cat and Dog votes
+# Define Metric Descriptors for Cat and Dog votes using the integer value for CUMULATIVE_INT64
 cats_metric_descriptor = MetricDescriptor(
     name="Cats_Vote_Count",
     description="Tracks number of votes for Cats",
     unit="1",
-    type_="CUMULATIVE_INT64",  # Cumulative count for integer values
+    type_=2,  # CUMULATIVE_INT64 as integer value
     label_keys=[]  # No label keys
 )
 
@@ -38,7 +39,7 @@ dogs_metric_descriptor = MetricDescriptor(
     name="Dogs_Vote_Count",
     description="Tracks number of votes for Dogs",
     unit="1",
-    type_="CUMULATIVE_INT64",  # Cumulative count for integer values
+    type_=2,  # CUMULATIVE_INT64 as integer value
     label_keys=[]  # No label keys
 )
 
