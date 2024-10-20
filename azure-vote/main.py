@@ -14,8 +14,6 @@ from opencensus.metrics.export.metric_descriptor import MetricDescriptor
 from opencensus.metrics.export.time_series import TimeSeries
 from opencensus.metrics.export.point import Point
 from opencensus.metrics.export.value import ValueDouble
-from opencensus.metrics.export.label_key import LabelKey
-from opencensus.metrics.export.label_value import LabelValue
 
 # App Insights - Replace 'your-instrumentation-key' with the actual Instrumentation Key
 instrumentation_key = '3460234a-f495-4a32-a175-bcc0a300d135'
@@ -32,16 +30,14 @@ cats_metric_descriptor = MetricDescriptor(
     name="Cats_Vote_Count",
     description="Tracks number of votes for Cats",
     unit="1",
-    type_=MetricDescriptor.Type.CUMULATIVE_INT64,
-    label_keys=[LabelKey("vote", "vote")]
+    type_=MetricDescriptor.Type.CUMULATIVE_INT64
 )
 
 dogs_metric_descriptor = MetricDescriptor(
     name="Dogs_Vote_Count",
     description="Tracks number of votes for Dogs",
     unit="1",
-    type_=MetricDescriptor.Type.CUMULATIVE_INT64,
-    label_keys=[LabelKey("vote", "vote")]
+    type_=MetricDescriptor.Type.CUMULATIVE_INT64
 )
 
 # Tracing setup
@@ -74,9 +70,9 @@ if app.config['SHOWHOST'] == "true":
 if not r.get(button1): r.set(button1, 0)
 if not r.get(button2): r.set(button2, 0)
 
-def record_metrics(metric_descriptor, vote_count, vote_label):
+def record_metrics(metric_descriptor, vote_count):
     point = Point(ValueDouble(vote_count), datetime.utcnow())
-    time_series = TimeSeries(label_values=[LabelValue(vote_label)], points=[point])
+    time_series = TimeSeries(points=[point])
     metric = Metric(metric_descriptor=metric_descriptor, time_series=[time_series])
     exporter.export_metrics([metric])
 
@@ -87,8 +83,8 @@ def index():
 
     if request.method == 'GET':
         # Record initial metrics
-        record_metrics(cats_metric_descriptor, int(vote1), "Cats")
-        record_metrics(dogs_metric_descriptor, int(vote2), "Dogs")
+        record_metrics(cats_metric_descriptor, int(vote1))
+        record_metrics(dogs_metric_descriptor, int(vote2))
 
         # Trace votes
         tracer.span(name="cat_vote")
@@ -125,9 +121,9 @@ def index():
 
             # Record metrics
             if vote == button1:
-                record_metrics(cats_metric_descriptor, int(vote1), "Cats")
+                record_metrics(cats_metric_descriptor, int(vote1))
             else:
-                record_metrics(dogs_metric_descriptor, int(vote2), "Dogs")
+                record_metrics(dogs_metric_descriptor, int(vote2))
 
             return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
