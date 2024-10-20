@@ -14,10 +14,9 @@ from opencensus.metrics.export.metric_descriptor import MetricDescriptor
 from opencensus.metrics.export.time_series import TimeSeries
 from opencensus.metrics.export.point import Point
 from opencensus.metrics.export.value import ValueDouble
-from opencensus.metrics.export.label_key import LabelKey
 
 # App Insights - Replace 'your-instrumentation-key' with the actual Instrumentation Key
-instrumentation_key = 'your-instrumentation-key'
+instrumentation_key = '3460234a-f495-4a32-a175-bcc0a300d135'
 
 # Logging setup
 logger = logging.getLogger(__name__)
