@@ -131,10 +131,10 @@ def index():
             tracer.span(name="cat_vote" if vote == button1 else "dog_vote")
 
             # Record metrics
-            if vote == button1:
-                record_metrics(cats_metric_descriptor, int(vote1))
-            else:
-                record_metrics(dogs_metric_descriptor, int(vote2))
+            # if vote == button1:
+            #     record_metrics(cats_metric_descriptor, int(vote1))
+            # else:
+            #     record_metrics(dogs_metric_descriptor, int(vote2))
 
             return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
