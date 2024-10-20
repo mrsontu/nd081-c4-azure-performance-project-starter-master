@@ -73,11 +73,19 @@ if app.config['SHOWHOST'] == "true":
 if not r.get(button1): r.set(button1, 0)
 if not r.get(button2): r.set(button2, 0)
 
+   
 def record_metrics(metric_descriptor, vote_count):
+    # Set current timestamp as the start time
+    start_timestamp = datetime.utcnow()
+
+    # Create a point with the vote count
     point = Point(ValueDouble(vote_count), datetime.utcnow())
-    time_series = TimeSeries(points=[point])
-    metric = Metric(metric_descriptor=metric_descriptor, time_series=[time_series])
-    exporter.export_metrics([metric])
+
+    # Create a TimeSeries with empty label_values and the current start timestamp
+    time_series = TimeSeries(points=[point], label_values=[], start_timestamp=start_timestamp)
+
+    # Export the TimeSeries directly using the exporter
+    exporter.export_metrics([time_series])
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
