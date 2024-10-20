@@ -14,9 +14,10 @@ from opencensus.metrics.export.metric_descriptor import MetricDescriptor
 from opencensus.metrics.export.time_series import TimeSeries
 from opencensus.metrics.export.point import Point
 from opencensus.metrics.export.value import ValueDouble
+from opencensus.metrics.export.label_key import LabelKey
 
 # App Insights - Replace 'your-instrumentation-key' with the actual Instrumentation Key
-instrumentation_key = '3460234a-f495-4a32-a175-bcc0a300d135'
+instrumentation_key = 'your-instrumentation-key'
 
 # Logging setup
 logger = logging.getLogger(__name__)
@@ -25,17 +26,21 @@ logger.addHandler(AzureLogHandler(connection_string=f'InstrumentationKey={instru
 # Metrics Exporter
 exporter = MetricsExporter(connection_string=f'InstrumentationKey={instrumentation_key}')
 
-# Define Metric Descriptors for Cat and Dog votes (without specifying the type)
+# Define Metric Descriptors for Cat and Dog votes with the required arguments
 cats_metric_descriptor = MetricDescriptor(
     name="Cats_Vote_Count",
     description="Tracks number of votes for Cats",
-    unit="1"
+    unit="1",
+    type_=MetricDescriptor.Type.CUMULATIVE_INT64,  # Cumulative count for integer values
+    label_keys=[]  # No label keys
 )
 
 dogs_metric_descriptor = MetricDescriptor(
     name="Dogs_Vote_Count",
     description="Tracks number of votes for Dogs",
-    unit="1"
+    unit="1",
+    type_=MetricDescriptor.Type.CUMULATIVE_INT64,  # Cumulative count for integer values
+    label_keys=[]  # No label keys
 )
 
 # Tracing setup
