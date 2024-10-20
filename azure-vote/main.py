@@ -94,8 +94,8 @@ def index():
 
     if request.method == 'GET':
         # Record initial metrics
-        record_metrics(cats_metric_descriptor, int(vote1))
-        record_metrics(dogs_metric_descriptor, int(vote2))
+        # record_metrics(cats_metric_descriptor, int(vote1))
+        # record_metrics(dogs_metric_descriptor, int(vote2))
 
         # Trace votes
         tracer.span(name="cat_vote")
