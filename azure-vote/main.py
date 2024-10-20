@@ -25,12 +25,12 @@ logger.addHandler(AzureLogHandler(connection_string=f'InstrumentationKey={instru
 # Metrics Exporter
 exporter = MetricsExporter(connection_string=f'InstrumentationKey={instrumentation_key}')
 
-# Define Metric Descriptors for Cat and Dog votes with the required arguments
+# Define Metric Descriptors for Cat and Dog votes
 cats_metric_descriptor = MetricDescriptor(
     name="Cats_Vote_Count",
     description="Tracks number of votes for Cats",
     unit="1",
-    type_=MetricDescriptor.Type.CUMULATIVE_INT64,  # Cumulative count for integer values
+    type_="CUMULATIVE_INT64",  # Cumulative count for integer values
     label_keys=[]  # No label keys
 )
 
@@ -38,7 +38,7 @@ dogs_metric_descriptor = MetricDescriptor(
     name="Dogs_Vote_Count",
     description="Tracks number of votes for Dogs",
     unit="1",
-    type_=MetricDescriptor.Type.CUMULATIVE_INT64,  # Cumulative count for integer values
+    type_="CUMULATIVE_INT64",  # Cumulative count for integer values
     label_keys=[]  # No label keys
 )
 
